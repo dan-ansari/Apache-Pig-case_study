@@ -18,12 +18,12 @@ died_gender_grp = GROUP died_Person by Sex;
 sur_average_age = foreach survived_gender_grp generate CONCAT('Survived_',group) ,AVG(survived_Person .Age) as avg_age; 
 died_average_age = foreach died_gender_grp generate CONCAT('Died_',group) ,AVG(died_Person .Age) as avg_age; 
 
-merged_data = UNION sur_average_age, died_average_age ;                       
+merged_data = UNION sur_average_age, died_average_age;                       
 
 STORE merged_data INTO '/titanic/final_report.txt' using PigStorage(',');  
 
 final_avg_age_report = load '/titanic/final_report.txt' using PigStorage(',') as (category:chararray,avg_age:int);
-dump final_avg_age_report 
+dump final_avg_age_report; 
 
 
 
